@@ -1,0 +1,41 @@
+<div th:fragment="detalles-pedido">
+    <div id="fake-container-body">
+        <br>
+        <h1>Detalles del Pedido:  <span th:text="${idpedido}"></span></h1>
+        <br>
+        <button style="margin-left: 15px;" onclick="parent.location.href='/pedido'">Regresar</button>
+        <br>
+        <!-- MODAL -->
+        <a style="visibility:hidden;" class="btn-open-modal" id="agregarProducto">Agregar nuevo</a>
+        <div class="modal-container modal-disable-close">
+            <div class="modal-window-w3">
+                <a href="#" class="btn-close-modal">
+                    <ion-icon name="close"></ion-icon>
+                </a>
+            </div>
+        </div>
+        <div id="table-admins" class="table-crud">
+            <table class="table" id="tPedido">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Producto</th>
+                    <th>Cantidad Solicitada</th>
+                    <th>Precio por unidad</th>
+                    <th>Subtotal</th>
+                </tr>
+                </thead>
+                <tbody >
+                <tr th:each="detalle:${detalles}">
+                    <td th:text="${detalle.id}"></td>
+                    <td th:text="${detalle.idProducto.nombreProducto}"></td>
+                    <td th:text="${detalle.cantidad}"></td>
+                    <td th:text="${detalle.precio}"></td>
+                    <td th:text="${detalle.precioTotal}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script th:src="@{/js/pedido.js}"></script>
+</div>

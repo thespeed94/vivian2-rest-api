@@ -1,0 +1,105 @@
+<div th:fragment="reservas">
+	<link rel="stylesheet" th:href="@{/css/libcss/own-modal.css}"
+		href="../static/css/libcss/own-modal.css">
+	<div id="fake-container-body">
+		<br>
+		<h1>Mantenimiento Reservas</h1>
+		<br> <a class="btn-open-modal btn primary" id="agregarReserva"
+			blue>Agregar</a>
+
+		<!-- MODAL -->
+		<div class="modal-container modal-disable-close">
+			<div class="modal-window-w3">
+				<a href="#" class="btn-close-modal"> <ion-icon name="close"></ion-icon>
+				</a>
+
+				<div id="tituloForm" class="header-h2-github">Nueva Reserva</div>
+
+				<form method="post" th:action="@{/reservaciones}"
+					th:object="${reserva}" id="formReservaciones">
+					<div class="mb-3">
+						<label class="" id="labelId">ID:</label> <input type="text"
+							class="" name="id" id="txtId" value=""
+							placeholder="Ingrese el id de Reserva" readOnly>
+					</div>
+
+					<div class="fake-form">
+						<div class="block-modal">
+							<ion-icon name="person"></ion-icon>
+							<input type="text" class="" name="dniUsuario" id="txtDniUsuario"
+								th:field="*{usuario.dni}" maxLength="8" value=""
+								placeholder="Ingresa el dni del cliente">
+						</div>
+
+						<div class="block-modal">
+							<ion-icon name="person"></ion-icon>
+							<select name="nMesa" id="txtnMesa" th:field="*{nMesa}">
+								<option th:each="mesa:${mesas}" th:piso="${mesa.piso}"
+									th:value="${mesa.id}"
+									th:text="'Mesa: ' +${mesa.id} +' Piso: ' + ${mesa.piso}+ ' Capacidad:' + ${mesa.capacidadPersonas}">
+							</select>
+
+						</div>
+						<div class="block-modal">
+							<ion-icon name="calendar"></ion-icon>
+							<input type="text" class="" name="fechaReservacion"
+								id="txtFechaReservacion" th:field="*{fechaReservacion}" value=""
+								placeholder="Fecha de reservacion">
+						</div>
+
+						<div class="block-modal">
+							<ion-icon name="switch"></ion-icon>
+							<select name="txtTurno" id="txtTurno" th:field="*{turno.id}">
+								<option value="1" selected>Ma&ntildeana</option>
+								<option value="2">Tarde</option>
+								<option value="3">Noche</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="actions-form">
+						<button type="button" class="principal" id="btnGuardarReserva"
+							name="opcion" value="" blue>Guardar</button>
+						<button type="reset" class="ghostly" id="btnGuardarAdminUser">Resetear</button>
+					</div>
+				</form>
+			</div>
+		</div>
+
+		<div id="table-reservas">
+			<table class="table" id="tReservas">
+				<thead>
+					<tr>
+						<th class="text-center">ID</th>
+						<th class="text-center">DNI</th>
+						<th class="text-center">Cliente</th>
+						<th class="text-center">Mesa</th>
+						<th class="text-center">Piso</th>
+						<th class="text-center">Fecha Reserva</th>
+						<th class="text-center">Turno</th>
+						<th class="text-center">Acciones</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr th:each="reserva:${reservas}">
+						<td th:text="${reserva.idReserva}"></td>
+						<td th:text="${reserva.getUsuario.dni}"></td>
+						<td
+							th:text="${reserva.usuario.nombresUsuario + ' ' + reserva.usuario.apellidosUsuario}"></td>
+						<td th:text="${reserva.nMesa}"></td>
+						<td th:idPiso="${reserva.piso}" th:text="${reserva.obtenerPiso()}"></td>
+						<td th:text="${reserva.fechaString()}"></td>
+						<td th:idTurno="${reserva.getTurno.id}"
+							th:text="${reserva.turno.horario}"></td>
+						<td class="text-center"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<script th:src="@{/js/reservas.js}"></script>
+	<!-- Modal propio -->
+	<script th:src="@{/js/own-modal.js}" src="../static/js/own-modal.js"></script>
+
+</div>

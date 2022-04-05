@@ -1,0 +1,115 @@
+<div th:fragment="customerusers">
+    <link rel="stylesheet" th:href="@{/css/libcss/own-modal.css}" href="../static/css/libcss/own-modal.css">
+        <div id="fake-container-body">
+            <br>
+                <h1>Mantenimiento Usuarios Cliente</h1>
+            <br>
+                <a class="btn-open-modal btn primary" id="agregarCustomerUser" blue>Agregar</a>
+
+                <!-- MODAL -->
+                <div class="modal-container modal-disable-close">
+                    <div class="modal-window-w3">
+                        <a href="#" class="btn-close-modal">
+                            <ion-icon name="close"></ion-icon>
+                        </a>
+                            
+                        <div class="header-h2-github">
+                            Nuevo Cliente
+                        </div>
+
+                        <form method="post" th:action="@{/customerusers}" th:object="${usuario}" id="formCustomerUser">
+                            <div class="mb-3">
+                                <label class="" id="labelId">ID:</label>
+                                <input type="text" class="" name="id" id="txtId" value="" placeholder="Ingrese el id de Usuario" readOnly>
+                            </div>
+
+                            <div class="fake-form">
+                                <div class="block-modal">
+                                    <ion-icon name="apps"></ion-icon>
+                                    <input type="text" class="" name="dni" id="txtDni" value="" th:field="*{dni}" maxLength="8" placeholder="Ingresa el DNI">
+                                </div>
+    
+                                <div class="block-modal">
+                                    <ion-icon name="person"></ion-icon>
+                                    <input type="text" class="" name="nombresUsuario" id="txtNombres" th:field="*{nombresUsuario}" value="" placeholder="Ingresa los nombres">
+                                </div>
+    
+                                <div class="block-modal">
+                                    <ion-icon name="person"></ion-icon>
+                                    <input type="text" class="" name="apellidosUsuario" id="txtApellidos" th:field="*{apellidosUsuario}" value="" placeholder="Ingresa los apellidos">
+                                </div>
+    
+                                <div class="block-modal">
+                                    <ion-icon name="call"></ion-icon>
+                                    <input type="text" class="" name="telefono" id="txtTel" th:field="*{telefono}" value="" maxLength="9" placeholder="Ingresa el teléfono">
+                                </div>
+    
+                                <div class="block-modal">
+                                    <ion-icon name="contact"></ion-icon>
+                                    <input type="email" class="" name="email" id="txtEmail" th:field="*{email}" value="" placeholder="Ingresa el usuario">
+                                </div>
+    
+                                <div class="block-modal">
+                                    <ion-icon name="lock"></ion-icon>
+                                    <input type="password" class="" name="clave" id="txtClave" th:field="*{clave}" value="" placeholder="Ingresa la contraseña">
+                                </div>
+                                    
+    
+                                <div class="block-modal">
+                                    <ion-icon name="repeat"></ion-icon>
+                                    <input type="password" class="" name="txtRepeatPassword" id="txtRepeatPassword"value="" placeholder="Repita la contraseña">
+                                </div>
+    
+                               <div class="block-modal">
+                                    <ion-icon name="switch"></ion-icon>
+                                    <select name="txtEstado" id="txtEstado" th:field="*{estado}">
+                                        <option value="1" selected>Activo</option>
+                                        <option value="0">Inactivo</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="actions-form">
+                                <button type="button" class="principal" id="btnGuardarCustomerUser" name="opcion"value="" blue>Guardar</button>
+                                <button type="reset" class="ghostly" id="btnGuardarAdminUser">Resetear</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div id="table-admins">
+                    <table class="table" id="tAdminUsuarioCustomer">
+                        <thead>
+                        <tr>
+                            <th class="text-center">ID</th>
+                            <th class="text-center">DNI</th>
+                            <th class="text-center">Nombres</th>
+                            <th class="text-center">Apellidos</th>
+                            <th class="text-center">Usuario</th>
+                            <th class="text-center">Telefono</th>
+                            <th class="text-center">Fecha Registro</th>
+                            <th class="text-center">Estado</th>
+                            <th class="text-center">Acciones</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr th:each="customeruser:${customerusers}">
+                                <td th:text="${customeruser.id}"></td>
+                                <td th:text="${customeruser.dni}"></td>
+                                <td th:text="${customeruser.nombresUsuario}"></td>
+                                <td th:text="${customeruser.apellidosUsuario}"></td>
+                                <td th:text="${customeruser.email}"></td>
+                                <td th:text="${customeruser.telefono}"></td>
+                                <td th:text="${customeruser.fechaString()}"></td>
+                                <td th:text="${customeruser.estadoString()}"></td>
+                                <td class="text-center"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+        </div>
+        <script th:src="@{/js/customer-users.js}"></script>
+        <!-- Modal propio -->
+        <script th:src="@{/js/own-modal.js}" src="../static/js/own-modal.js"></script>
+</div>

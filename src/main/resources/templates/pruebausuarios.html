@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- css -->
+    <link rel="stylesheet" href="../static/css/error.css">
+    <title>PRUEBA DE USUARIOS</title>
+</head>
+<body>
+<div>
+    <h1>El server corre correctamente</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Usuario</th>
+            <th>Nombre</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="usuario:${categorias}">
+            <td th:text="${usuario.id}"></td>
+            <td th:text="${usuario.descripcionCategoria}"></td>
+        </tr>
+
+        </tbody>
+    </table>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<div th:fragment="pedido">
+    <div id="fake-container-body">
+        <br>
+        <h1>Visualización de Pedidos</h1>
+        <br>
+        <!-- MODAL -->
+        <a style="visibility: hidden" class="btn-open-modal" id="agregarProducto">Agregar nuevo</a>
+        <div class="modal-container modal-disable-close">
+            <div class="modal-window-w3">
+                <a href="#" class="btn-close-modal">
+                    <ion-icon name="close"></ion-icon>
+                </a>
+            </div>
+        </div>
+        <!-- -->
+        <div id="table-admins" class="table-crud">
+            <table class="table" id="tPedido">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Cliente</th>
+                    <th>DNI Cliente</th>
+                    <th>Fecha de solicitud</th>
+                    <th>Monto</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="pedido:${pedidos}">
+                    <td th:text="${pedido.id}"></td>
+                    <td th:text="${pedido.idUsuario.nombresUsuario} + ' ' + ${pedido.idUsuario.apellidosUsuario}"></td>
+                    <td th:text="${pedido.idUsuario.dni}"></td>
+                    <td th:text="${pedido.fechaString()}"></td>
+                    <td th:text="${pedido.monto}"></td>
+                    <td th:text="${pedido.estado}"></td>
+                    <td class="text-center"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script th:src="@{/js/pedido.js}"></script>
+    <!-- Modal propio -->
+    <script th:src="@{/js/own-modal.js}" src="../static/js/own-modal.js"></script>
+</div>

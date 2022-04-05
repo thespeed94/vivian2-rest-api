@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="author" content="DonattoMinaya AdrianMauro">
+<meta name="description" content="Página administrativa de Vivian">
+<meta name="keywords" content="Restaurante Recetas Comida">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" th:href="@{/img/corazon.jpg}" type="image/x-icon">
+<link rel="stylesheet" th:href="@{/css/initial-progress.css}">
+<!-- Data Table CSS -->
+<link rel="stylesheet"
+	href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+<!-- Toastr CSS -->
+<link rel="stylesheet" th:href="@{/css/toastr.css}">
+<script th:src="@{/js/jquery.min.js}"></script>
+<title>Vivian &#124; Sala de Progreso</title>
+</head>
+<body>
+	<div th:replace="/fragments/sidebar :: sidebar"></div>
+
+	<!--ESTOS DIVS SON OBLIGATORIOS PARA UTILIZAR LOS FRAGMENTOS-->
+	<div id="fake-body">
+		<div id="fake-min-body">
+			<div th:replace="/fragments/navbar :: navbar"></div>
+
+			<div th:block th:if="${verFragmento == 0}">
+				<div th:insert="fragments/gs-fragment :: gs" />
+			</div>
+			<div th:block th:if="${verFragmento == 1}">
+				<div th:insert="fragments/admin-users :: adminusers" />
+			</div>
+			<div th:block th:if="${verFragmento == 2}">
+				<div th:insert="fragments/customer-users :: customerusers" />
+			</div>
+			<div th:block th:if="${verFragmento == 3}">
+				<div th:insert="fragments/reservas :: reservas" />
+			</div>
+			<div th:block th:if="${verFragmento == 4}">
+				<div th:insert="fragments/producto :: producto" />
+			</div>
+			<div th:block th:if="${verFragmento == 5}">
+				<div th:insert="fragments/mesas :: mesas" />
+			</div>
+			<div th:block th:if="${verFragmento == 6}">
+				<div th:insert="fragments/categories-product :: categoriesproduct" />
+			</div>
+			<div th:block th:if="${verFragmento == 7}">
+				<div th:insert="fragments/turno :: turnos" />
+			</div>
+			<div th:block th:if="${verFragmento == 8}">
+				<div th:insert="fragments/pedido :: pedido" />
+			</div>
+			<div th:block th:if="${verFragmento == 9}">
+				<div th:insert="fragments/detalles-pedido :: detalles-pedido" />
+			</div>
+			<div th:block th:if="${verFragmento == 10}">
+				<div th:insert="fragments/reportes-productos:: reportes-productos" />
+			</div>
+
+		</div>
+	</div>
+	<!-- Swal -->
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<!-- Jquery Validator -->
+	<script
+		src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
+	<!-- Data Table-->
+	<script
+		src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+	<!--Toastr JS-->
+	<script th:src="@{/js/toastr.js}"></script>
+	<!--Ion Icons-->
+	<script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+</body>
+</html>

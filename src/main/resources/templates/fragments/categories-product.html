@@ -1,0 +1,73 @@
+<div th:fragment="categoriesproduct">
+    <div id="fake-container-body">
+	<br>
+	<h1>Mantenimiento Categorias</h1>
+	<br> <a class="btn-open-modal" id="agregarCategoriesProduct">Agregar
+		nueva</a>
+	<!-- MODAL -->
+	<div class="modal-container modal-disable-close">
+		<div class="modal-window-w3">
+			<a href="#" class="btn-close-modal"> <ion-icon name="close"></ion-icon>
+			</a>
+
+			<div class="header-h2-github">Nuevas Categorias</div>
+
+			<form method="post" th:action="@{/categories-product}"
+				th:object="${categoria}" id="formCategoriesProduct">
+				<div class="mb-3">
+					<label class="" id="labelId">ID:</label> <input type="text"
+						class="" name="id" id="txtId" value=""
+						placeholder="Ingrese el id de Categoria" readonly>
+				</div>
+
+				<div class="fake-form">
+					<div class="block-modal">
+						<ion-icon name="apps"></ion-icon>
+						<input type="text" class="" name="descripcionCategoria" id="txtDescripcion"
+							value="" th:field="*{descripcionCategoria}" maxlength="45"
+							placeholder="Ingresar descripcion">
+					</div>
+
+					<div class="block-modal">
+						<ion-icon name="switch"></ion-icon>
+						<select name="estado" id="txtEstado" th:field="*{estado}">
+							<option value="1" selected>Activo</option>
+							<option value="0">Inactivo</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="actions-form">
+					<button type="button" class="principal"
+						id="btnGuardarCategoriesProduct" name="opcion" value="" blue>Guardar</button>
+					<button type="reset" class="ghostly"
+						id="btnResetear">Resetear</button>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div id="table-admins" class="table-crud">
+		<table class="table" id="tCategoriesProduct">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Descripcion</th>
+					<th>Estado</th>
+					<th class="text-center">Acciones</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="categoria:${categorias}">
+					<td th:text="${categoria.id}"></td>
+					<td th:text="${categoria.descripcionCategoria}"></td>
+					<td th:text="${categoria.estadoString()}"></td>
+					<td class="text-center"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+<script th:src="@{/js/categories-product.js}"></script> 
+<!-- Modal propio -->
+<script th:src="@{/js/own-modal.js}" src="../static/js/own-modal.js"></script>
+</div>

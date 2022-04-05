@@ -1,0 +1,123 @@
+/* This file contains Vivian's styles configuration */
+@import url(libcss/buttons.css);
+@import url(libcss/card.css);
+@import url(libcss/headers-markdown-github.css);
+@import url(libcss/div-cards.css);
+@import url(libcss/swal.css);
+@import url(libcss/own-modal.css);
+@import url(libcss/tables-crud.css);
+
+/* Fonts used */
+@import url('https://fonts.googleapis.com/css2?family=Catamaran:wght@100&display=swap'); /* Catamaran -> Para titulos */
+@import url('https://fonts.googleapis.com/css2?family=Assistant:wght@200&display=swap'); /* Assistant -> Para parrafos */
+
+:root {
+    --red-dark: #ea2c1a;
+}
+
+:root {
+    --default-purple: #373295;
+    --default-white: #f2f2f2;
+    --default-black: #404040;
+    --default-blue: #1B3C59;
+    --default-green: #9bd4ae;
+    --default-orange: #F2D5BB;
+    --default-yellow: #F0F0A8;
+    --default-pink: #F2A999;
+    --default-red: #F28177;
+    --default-shadow-gray: #a6a6a6;
+
+}
+
+/* the same color but more clear */
+:root {
+    --shadow-clear: #d9d9d9;
+    --red-clear: #fde9e7;
+    --white-clear: #fafafa;
+    --orange-clear: #ffc999;
+    --yellow-clear: #ffff80;
+}
+
+html {
+    user-select: none;
+    scroll-behavior: smooth;
+}
+
+img {
+    width: 100%;
+    pointer-events: none;
+    vertical-align: middle;
+}
+
+a, li, ul, ol { 
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style: none;
+}
+
+a {
+    cursor: pointer !important;
+}
+
+label {
+    display: block;
+}
+
+input {
+    outline: none;
+    display: block;
+}
+
+h1, h2, h3 {
+    font-family: 'Catamaran' !important;
+} 
+
+.icons-menu {
+    display: flex;
+    font-size: 32px;
+    color: var(--default-black);
+}
+
+.icons-menu .icon {
+    cursor: pointer;
+    padding: 10px;
+    display: flex;
+    align-self: center;
+    margin: 0 10px;
+    transition: box-shadow .3s;
+    border-radius: 4px;
+}
+
+#profile {
+    justify-content: flex-end;
+    width: 200px;
+    display: flex;
+}
+
+#profile div {
+    margin: 0 10px;
+    display: flex;
+    align-self: center;
+    justify-content:flex-end;
+}
+
+.name-profile {
+    width: 60%;
+}
+
+#profile .photo {
+    width: 70px;
+}
+
+.photo img {
+    border-radius: 50%;
+}
+
+.icon:hover {
+    box-shadow: 0 3px 5px -2px var(--default-shadow-gray);
+}
+
+label.error {
+    color: red;
+}

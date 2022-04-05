@@ -1,0 +1,7 @@
+.table-crud * {
+    font-family: 'Catamaran';
+}
+
+table tbody {
+    text-align: center!important;
+}

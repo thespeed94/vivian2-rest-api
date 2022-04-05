@@ -1,0 +1,90 @@
+/* All files .css need the default settings */
+@import url(general.css);
+
+/* Normalize css */
+@import url(../lib.css/normalize.css);
+
+body {
+    background-color: var(--default-white);
+}
+
+.container {
+    display: flex;
+    width: 100%;
+}
+
+.container > div {
+    width: 50%;
+    height: 100vh;
+}
+
+.fondo {
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: top;
+    background-image: url("../img/fondo_login.jpg");
+}
+
+.login {
+    display: flex;
+    align-items: center;
+}
+
+.form-login {
+    width: 100%;
+    height: 50%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.block-form {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin: 2em;
+}
+
+.block-form:first-child div {
+    width: 20%;
+}
+
+.block-form input {
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    font-family: 'Catamaran';
+}
+
+.block-form input {
+    padding: 1em 1.5em;
+    border-radius: 4px;
+}
+
+.block-form ion-icon {
+    color: var(--default-black);
+    font-size: 25px;
+    margin-right: 15px;
+}
+
+span.separator {
+    align-self: center;
+    margin: 0 5px;
+    height: 20px;
+    border: 1px solid var(--black-ghostly);
+}
+
+input {
+    color: gray;
+    transition: box-shadow ease, border-color ease;
+    transition: .1s;
+}
+
+input:focus:invalid {
+    color: var(--default-black);
+    box-shadow: 0 0 10px var(--default-pink);
+    border-color: var(--default-pink);
+}
+
+input:focus:valid {
+    border-color: var(--default-green);
+    box-shadow: 0 0 10px var(--default-green);
+}

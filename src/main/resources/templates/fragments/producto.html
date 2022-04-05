@@ -1,0 +1,107 @@
+<div th:fragment="producto">
+    <div id="fake-container-body">
+        <br>
+        <h1>Mantenimiento Productos</h1>
+        <br>
+        <a class="btn-open-modal" id="agregarProducto">Agregar nuevo</a>
+        <!-- MODAL -->
+        <div class="modal-container modal-disable-close">
+            <div class="modal-window-w3">
+                <a href="#" class="btn-close-modal">
+                    <ion-icon name="close"></ion-icon>
+                </a>
+
+                <div class="header-h2-github" id="tituloForm">
+                    Nuevo Producto
+                </div>
+
+                <form method="post" th:action="@{/producto}" th:object="${producto}" id="formProducto">
+                    <div class="mb-3">
+                        <label class="" id="labelId">ID:</label>
+                        <input type="text" class="" name="id" id="txtId" value="" placeholder="Ingrese el id del Producto" readonly>
+                    </div>
+
+                    <div class="fake-form">
+                        <div class="block-modal">
+                            <ion-icon name="cube"></ion-icon>
+                            <input type="text" class="" name="nombreProducto" id="txtNombreProducto" value="" th:field="*{nombreProducto}" maxlength="35" placeholder="Ingresa el nombre del producto">
+                        </div>
+
+                        <div class="block-modal">
+                            <ion-icon name="pricetag"></ion-icon>
+                            <input type="text" class="" name="precio" id="txtPrecio" th:field="*{precio}" value="" placeholder="Ingresa el precio">
+                        </div>
+
+                        <div class="block-modal">
+                            <ion-icon name="nutrition"></ion-icon>
+                            <select name="categoria" id="cboCategoria" th:field="*{idCategoria}">
+                                <option value="">Seleccione Categoría</option>
+                                <option th:each="categoria:${categorias}"
+                                        th:value="${categoria.id}"
+                                        th:text="${categoria.descripcionCategoria}"></option>
+                            </select>
+                        </div>
+
+                        <div class="block-modal">
+                            <ion-icon name="grid"></ion-icon>
+                            <input type="number" class="" name="stock" id="txtStock" th:field="*{stock}" placeholder="Stock">
+                        </div>
+
+                        <div class="block-modal">
+                            <ion-icon name="people"></ion-icon>
+                            <input type="number" class="" name="reparto" id="txtReparto" th:field="*{reparto}" placeholder="Ingresa la cantidad de personas por plato">
+                        </div>
+
+                        <div class="block-modal">
+                            <ion-icon name="switch"></ion-icon>
+                            <select name="txtEstado" id="txtEstado" th:field="*{estado}">
+                                <option value="1" selected>Activo</option>
+                                <option value="0">Inactivo</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="actions-form">
+                        <button type="button" class="principal" id="btnGuardarProducto" name="opcion" value="" blue>Guardar</button>
+                        <button type="reset" class="ghostly" id="btnLimpiarProductoForm">Resetear</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div id="table-admins" class="table-crud">
+            <table class="table" id="tProducto">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Precio</th>
+                    <th>Categoria</th>
+                    <th>Stock</th>
+                    <th>Reparto</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                    <th style="visibility:hidden;"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="producto:${productos}">
+                    <td th:text="${producto.id}"></td>
+                    <td th:text="${producto.nombreProducto}"></td>
+                    <td th:text="${producto.precio}"></td>
+                    <td th:text="${producto.idCategoria.descripcionCategoria}"></td>
+                    <td th:text="${producto.stock}"></td>
+                    <td th:text="${producto.reparto}"></td>
+                    <td th:text="${producto.estadoString()}"></td>
+                    <td class="text-center"></td>
+                    <td>
+                        <input type="hidden" class="idCat" th:value="${producto.idCategoria.id}">
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script th:src="@{/js/producto.js}"></script>
+    <!-- Modal propio -->
+    <script th:src="@{/js/own-modal.js}" src="../static/js/own-modal.js"></script>
+</div>

@@ -1,0 +1,100 @@
+<div th:fragment="gs">
+<div id="fake-container-body">
+            <div class="structure">
+                <div class="simple-div-card">
+                    <div class="description">
+                        <div class="header-h3-github">
+                            Los productos m&#225;s vendidos y solicitados
+                        </div>
+
+                        <div class="progress">
+                            <div class="products">
+                                <div class="prod">
+                                    <span>Producto:</span> <p id="productoGS">hola</p>
+                                </div>
+
+                                <div class="prod">
+                                    <span>Precio:</span> <p id="precioGS">hola</p>
+                                </div>
+
+                                <div class="prod">
+                                    <span>&#218;ltima Venta:</span> <p id="uventaGS">hola</p>
+                                </div>
+
+                                <div class="prod">
+                                    <span>Ganancias:</span> <p id="gananciaGS">hola</p>
+                                </div>
+                            </div>
+
+                            <div class="products">
+                                <div class="prod">
+                                    <span>Producto:</span> <p id="producto2GS">hola</p>
+                                </div>
+
+                                <div class="prod">
+                                    <span>Precio:</span> <p id="precio2GS">hola</p>
+                                </div>
+
+                                <div class="prod">
+                                    <span>&#218;ltima Venta:</span> <p id="uventa2GS">hola</p>
+                                </div>
+
+                                <div class="prod">
+                                    <span>Ganancias:</span> <p id="ganancia2GS">hola</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button id="productos2" class="ghostly gs">Ver completo</button>
+                    </div>
+                </div>
+
+                <div class="simple-div-card">
+                    <div class="description">
+                        <div class="header-h3-github">
+                            Reservaciones totales                        
+                        </div>
+						
+						<div style="display: flex;align-items: center;height:200px">
+							<div class="progress" style="margin-top:10px;font-size:100px;text-align:center;margin: 0 auto;">
+	                        	13
+	                        </div>
+						</div>
+                        
+                        
+                    </div>
+                </div>
+
+                <div class="simple-div-card">
+                    <div class="description">
+                        <div class="header-h3-github">
+                            Solicitudes de Delivery
+                        </div>
+
+                        <div class="prod progress" style="align-items: center;display: flex;margin-top:15px;">
+							Mesas reservadas: <p style="color:black;margin-left:10px;font-weight: bold">10</p>							
+                        </div>
+                        <div class="prod progress" style="align-items: center;display: flex;margin-top:10px;">
+							Productos pedidos en el mes: <p style="color:black;margin-left:10px;font-weight: bold"> 45</p>							
+                        </div>		
+                        <div class="prod progress" style="align-items: center;display: flex;margin-top:10px;">
+							Turno m&#225;s solicitado: <p style="color:black;margin-left:10px;font-weight: bold">Ma&#241;ana</p>							
+                        </div>	
+                        <div class="prod progress" style="align-items: center;display: flex;margin-top:10px;">
+							Categoria m&#225;s vendida: <p style="color:black;margin-left:10px;font-weight: bold">Bebida</p>							
+                        </div>	
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="structure">
+                <div class="longest-div-card">
+
+                </div>
+            </div>
+        </div>
+
+    <script th:src="@{/js/reportes/general-summary.js}"></script>
+</div>

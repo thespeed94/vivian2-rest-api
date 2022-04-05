@@ -1,0 +1,110 @@
+<div th:fragment="adminusers">
+    <div id="fake-container-body">
+        <br>
+        <h1>Mantenimiento Usuarios Administrador</h1>
+        <br>
+        <a class="btn-open-modal" id="agregarAdminUser">Agregar nuevo</a>
+        <!-- MODAL -->
+        <div class="modal-container modal-disable-close">
+            <div class="modal-window-w3">
+                <a href="#" class="btn-close-modal">
+                    <ion-icon name="close"></ion-icon>
+                </a>
+                
+                <div class="header-h2-github">
+                    Nuevo Usuario Administrador
+                </div>
+
+                <form method="post" th:action="@{/adminusers}" th:object="${usuarioSpring}" id="formAdminUser">
+                    <div class="mb-3">
+                        <label class="" id="labelId">ID:</label>
+                        <input type="text" class="" name="id" id="txtId" value="" placeholder="Ingrese el id de Usuario" readonly>
+                    </div>
+
+                    <div class="fake-form">
+                        <div class="block-modal">
+                            <ion-icon name="apps"></ion-icon>
+                            <input type="text" class="" name="dni" id="txtDni" value="" th:field="*{dni}" maxlength="8" placeholder="Ingresa el DNI">
+                        </div>
+    
+                        <div class="block-modal">
+                            <ion-icon name="person"></ion-icon>
+                            <input type="text" class="" name="nombresUsuario" id="txtNombres" th:field="*{nombresUsuario}" value="" placeholder="Ingresa los nombres">
+                        </div>
+    
+                        <div class="block-modal">
+                            <ion-icon name="person"></ion-icon>
+                            <input type="text" class="" name="apellidosUsuario" id="txtApellidos" th:field="*{apellidosUsuario}" value="" placeholder="Ingresa los apellidos">
+                        </div>
+    
+                        <div class="block-modal">
+                            <ion-icon name="call"></ion-icon>
+                            <input type="text" class="" name="telefono" id="txtTel" th:field="*{telefono}" value="" maxlength="9" placeholder="Ingresa el teléfono">
+                        </div>
+    
+                        <div class="block-modal">
+                            <ion-icon name="contact"></ion-icon>
+                            <input type="email" class="" name="username" id="txtUsername" th:field="*{username}" value="" placeholder="Ingresa el usuario">
+                        </div>
+    
+                        <div class="block-modal">
+                            <ion-icon name="lock"></ion-icon>
+                            <input type="password" class="" name="password" id="txtPassword" th:field="*{password}" value="" placeholder="Ingresa la contraseña">
+                        </div>
+    
+                        <div class="block-modal">
+                            <ion-icon name="repeat"></ion-icon>
+                            <input type="password" class="" name="txtRepeatPassword" id="txtRepeatPassword" value="" placeholder="Repita la contraseña">
+                        </div>
+    
+                        <div class="block-modal">
+                            <ion-icon name="switch"></ion-icon>
+                            <select name="txtEstado" id="txtEstado" th:field="*{estado}">
+                                <option value="1" selected>Activo</option>
+                                <option value="0">Inactivo</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="actions-form">
+                        <button type="button" class="principal" id="btnGuardarAdminUser" name="opcion" value="" blue>Guardar</button>
+                        <button type="reset" class="ghostly" id="btnLimpiarAdminUserForm">Resetear</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div id="table-admins" class="table-crud">
+            <table class="table" id="tAdminUsuario">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>DNI</th>
+                    <th>Nombres</th>
+                    <th>Apellidos</th>
+                    <th>Usuario</th>
+                    <th>Telefono</th>
+                    <th>Fecha Registro</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="adminuser:${adminusers}">
+                    <td th:text="${adminuser.id}"></td>
+                    <td th:text="${adminuser.dni}"></td>
+                    <td th:text="${adminuser.nombresUsuario}"></td>
+                    <td th:text="${adminuser.apellidosUsuario}"></td>
+                    <td th:text="${adminuser.username}"></td>
+                    <td th:text="${adminuser.telefono}"></td>
+                    <td th:text="${adminuser.fechaString()}"></td>
+                    <td th:text="${adminuser.estadoString()}"></td>
+                    <td class="text-center"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script th:src="@{/js/admin-users.js}"></script>
+    <!-- Modal propio -->
+    <script th:src="@{/js/own-modal.js}" src="../static/js/own-modal.js"></script>
+</div>

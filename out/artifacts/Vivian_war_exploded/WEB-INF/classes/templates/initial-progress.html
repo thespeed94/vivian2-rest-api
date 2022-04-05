@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="author" content="DonattoMinaya AdrianMauro">
+    <meta name="description" content="Página administrativa de Vivian">
+    <meta name="keywords" content="Restaurante Recetas Comida">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="img/corazon.jpg" type="image/x-icon">
+    <link rel="stylesheet" href="css/initial-progress.css">
+    <!-- Swal -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/jquery.min.js"></script>
+    <title>Vivian &#124; Sala de Progreso</title>
+</head>
+<body>
+    <div id="fake-aside">
+        <div id="fake-min-aside">
+            <div class="min-container">
+                <div class="action-block">
+                    <div class="icon">
+                        <ion-icon name="clipboard"></ion-icon>
+                    </div>
+
+                    <div class="link">
+                        <a href="initial-progress.html">Resumen General</a>
+                    </div>
+                </div>
+
+                <div class="action-block">
+                    <div class="icon">
+                        <ion-icon name="albums"></ion-icon>
+                    </div>
+
+                    <div class="link">
+                        <a id="registro-servicios">Ver Registro de Servicios</a>
+                    </div>
+                </div>
+
+                <div class="action-block">
+                    <div class="icon">
+                        <ion-icon name="cart"></ion-icon>
+                    </div>
+
+                    <div class="link">
+                        <a id="productos">Ver Productos</a>
+                    </div>
+                </div>
+
+                <div class="action-block">
+                    <div class="icon">
+                        <ion-icon name="bicycle"></ion-icon>
+                    </div>
+
+                    <div class="link">
+                        <a id="delivery">Ver solicitudes de Delivery</a>
+                    </div>
+                </div>
+
+                <div class="action-block">
+                    <div class="icon">
+                        <ion-icon name="restaurant"></ion-icon>
+                    </div>
+
+                    <div class="link">
+                        <a href="">Ver Reservaciones</a>
+                    </div>
+                </div>
+
+                <div class="action-block">
+                    <div class="icon">
+                        <ion-icon name="people"></ion-icon>
+                    </div>
+
+                    <div class="link">
+                        <a href="">Ver Usuarios</a>
+                    </div>
+                </div>
+
+                <div class="action-block">
+                    <div class="icon">
+                        <ion-icon name="chatbubbles"></ion-icon>
+                    </div>
+
+                    <div class="link">
+                        <a href="">Conversaciones</a>
+                    </div>
+                </div>
+
+                <div class="action-block">
+                    <div class="icon">
+                        <ion-icon name="analytics"></ion-icon>
+                    </div>
+
+                    <div class="link">
+                        <a href="">Nuestras métricas</a>
+                    </div>
+                </div>
+
+                <div class="action-block">
+                    <div class="icon">
+                        <ion-icon name="construct"></ion-icon>
+                    </div>
+
+                    <div class="link">
+                        <a id="datos-vivian">Datos de Vivian</a>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="min-container-icon" onclick="toggleMenu()">
+                <ion-icon name="menu"></ion-icon>
+            </div>
+        </div>
+    </div>
+
+    <div id="fake-body">
+        <div id="fake-min-body">
+            <div id="fake-header">
+                <div class="header-nav">
+                    <div class="left">
+                        <div class="logo">
+                            <img src="img/corazon.jpg" alt="logo">
+                        </div>
+
+                        <div class="company">
+                            <span>Vivian</span>
+                        </div>
+                    </div>
+
+                    <div class="right">
+                        <div class="icons-menu">
+                            <div class="icon">
+                                <ion-icon name="lock"></ion-icon>
+                            </div>
+                            <div class="icon">
+                                <ion-icon name="camera"></ion-icon>
+                            </div>
+
+                            <div class="icon">
+                                <ion-icon name="contrast"></ion-icon>
+                            </div>
+                            
+                            <div class="icon" onclick="window.location.href='https\://slack.com/intl/es-pe/'">
+                                <ion-icon name="logo-slack"></ion-icon>
+                            </div>
+
+                            <div class="icon" onclick="sendBug()">
+                                <ion-icon name="bug"></ion-icon>
+                            </div>
+                        </div>
+                        <div id='profile'>
+                            <div class="name-profile">
+                                <span>Ho-yeon jung</span>
+                            </div>
+                            <div class="photo">
+                                <img src="https://cdn2.rsvponline.mx/files/rsvp/styles/wide/public/images/main/2021/hoyeon-jung_0.jpg">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="fake-container-body">
+                <div class="structure">
+                    <div class="simple-div-card">
+                        <div class="description">
+                            <div class="header-h3-github">
+                                Los productos más vendidos y solicitados
+                            </div>
+
+                            <div class="progress">
+                                <div class="products">
+                                    <div class="prod">
+                                        <span>Producto:</span> <p>hola</p>
+                                    </div>
+                                    
+                                    <div class="prod">
+                                        <span>Precio:</span> <p>hola</p>
+                                    </div>
+                                    
+                                    <div class="prod">
+                                        <span>Última Venta:</span> <p>hola</p>
+                                    </div>
+                                    
+                                    <div class="prod">
+                                        <span>Ganancias:</span> <p>hola</p>
+                                    </div>
+                                </div>
+
+                                <div class="products">
+                                    <div class="prod">
+                                        <span>Producto:</span> <p>hola</p>
+                                    </div>
+                                    
+                                    <div class="prod">
+                                        <span>Precio:</span> <p>hola</p>
+                                    </div>
+                                    
+                                    <div class="prod">
+                                        <span>Última Venta:</span> <p>hola</p>
+                                    </div>
+                                    
+                                    <div class="prod">
+                                        <span>Ganancias:</span> <p>hola</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button id="productos2" class="ghostly">Ver completo</button>
+                        </div>
+                    </div>
+
+                    <div class="simple-div-card">
+                        <div class="description">
+                            <div class="header-h3-github">
+                                Reservaciones totales
+                            </div>
+
+                            <div class="progress">
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="simple-div-card">
+                        <div class="description">
+                            <div class="header-h3-github">
+                                Solicitudes de Delivery
+                            </div>
+
+                            <div class="progress">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+               
+
+                <div class="structure">
+                    <div class="longest-div-card">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Swal js -->
+    <script src="js/swal.js"></script>
+
+    <!-- Jquery CDN -->
+    <script src="js/jquery-3.6.0.js"></script>
+
+    <!-- Management JS -->
+    <script src="js/management.js"></script>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('fake-aside').classList.toggle('active');
+        }
+
+        
+    </script>
+    
+    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+</body>
+</html>

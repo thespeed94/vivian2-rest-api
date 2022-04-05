@@ -1,0 +1,75 @@
+<div th:fragment="reportes-productos">
+    <link rel="stylesheet" th:href="@{/css/reportes.css}" href="../static/css/reportes.css">
+    <div id="fake-container-body">
+        <!-- MODAL -->
+        <a style="visibility: hidden" class="btn-open-modal" id="agregarProducto">Agregar nuevo</a>
+        <div class="modal-container modal-disable-close">
+            <div class="modal-window-w3">
+                <a href="#" class="btn-close-modal">
+                    <ion-icon name="close"></ion-icon>
+                </a>
+            </div>
+        </div>
+        <!-- -->
+            <h1 style="margin: 0; margin-bottom: 30px;margin-left: 20px;">Reportes Detallados de Productos</h1>
+
+            <div class="container-padre">
+
+                <div class="container">
+                    <canvas id="myChart"></canvas>
+                </div>
+
+                <div class="container" style="width: 400px!important;height: 400px!important;">
+                    <canvas id="myChart2"></canvas>
+                </div>
+
+            </div>
+
+            <div class="container-padre">
+
+                <div class="container" style="text-align: center">
+                    <select class="own-select" name="mes" id="cboMes">
+                        <option value="1">Enero</option>
+                        <option value="2">Febrero</option>
+                        <option value="3">Marzo</option>
+                        <option value="4">Abril</option>
+                        <option value="5">Mayo</option>
+                        <option value="6">Junio</option>
+                        <option value="7">Julio</option>
+                        <option value="8">Agosto</option>
+                        <option value="9">Setiembre</option>
+                        <option value="10">Octubre</option>
+                        <option value="11">Noviembre</option>
+                        <option value="12">Diciembre</option>
+                    </select>
+                    <canvas id="myChart3"></canvas>
+                </div>
+
+                <div class="container" style="text-align: center;width: 400px!important;margin-bottom: 100px;">
+                    <select class="own-select" name="mes2" id="cboMes2">
+                        <option value="1">Enero</option>
+                        <option value="2">Febrero</option>
+                        <option value="3">Marzo</option>
+                        <option value="4">Abril</option>
+                        <option value="5">Mayo</option>
+                        <option value="6">Junio</option>
+                        <option value="7">Julio</option>
+                        <option value="8">Agosto</option>
+                        <option value="9">Setiembre</option>
+                        <option value="10">Octubre</option>
+                        <option value="11">Noviembre</option>
+                        <option value="12">Diciembre</option>
+                    </select>
+                    <canvas id="myChart4" style="margin-bottom: 40px"></canvas>
+                </div>
+
+            </div>
+
+
+    </div>
+    <!-- Chart Js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.min.js"></script>
+    <!-- Plugins para Chart Js -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+    <script th:src="@{/js/reportes/reportes-productos.js}"></script>
+</div>

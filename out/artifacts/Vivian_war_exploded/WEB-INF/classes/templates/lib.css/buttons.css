@@ -1,0 +1,42 @@
+:root {
+    --pink-hover: #ff9780;
+}
+
+:root {
+    --black-ghostly: #808080; /* hover */
+}
+
+button {
+    font-family: 'Assistant' !important;
+    padding: 0.5em 1em;
+    outline: none;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 900;
+}
+
+button {
+    transition: background-color ease, color ease, border ease;
+    transition-duration: .2s;
+}
+
+button.principal {
+    border: 0;
+    color: var(--default-white);
+    background-color: var(--default-pink);
+}
+
+button.principal:hover {
+    background-color: var(--pink-hover);
+}
+
+button.ghostly {
+    font-weight: normal !important;
+    background-color: transparent !important;
+    color: var(--default-black);
+}
+
+button.ghostly:hover {
+    border-color: var(--black-ghostly);
+}

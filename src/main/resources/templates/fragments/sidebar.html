@@ -1,0 +1,186 @@
+<div th:fragment="sidebar">
+    <div id="fake-aside" class="active">
+        <div id="fake-min-aside">
+            <div class="min-container">
+                <div class="action-block">
+                    <div class="icon">
+                        <ion-icon name="clipboard"></ion-icon>
+                    </div>
+
+                    <div class="link">
+                        <a th:href="@{/principal}">Resumen General</a>
+                    </div>
+                </div>
+
+                <div class="action-block">
+                    <div class="icon">
+                        <ion-icon name="albums"></ion-icon>
+                    </div>
+
+                    <div class="link combo">
+                        <a id="reportes-detalles">Reportes Detallados</a>
+                        <ion-icon class = "icon-combo" name="arrow-dropdown"></ion-icon>
+                    </div>
+                </div>
+
+                <div class="fake-combo reportes">
+                    <div id="spacing-combo-reportes">
+
+                        <div class="action-block">
+                            <div class="icon">
+                                <ion-icon name="people"></ion-icon>
+                            </div>
+
+                            <div class="link">
+                                <a th:href="@{/producto/reportes}">Productos</a>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <div class="action-block">
+                    <div class="icon">
+                        <ion-icon name="briefcase"></ion-icon>
+                    </div>
+
+                    <div class="link combo">
+                        <a id="mantenimientos">Mantenimientos</a>
+                        <ion-icon class = "icon-combo" name="arrow-dropdown"></ion-icon>
+                    </div>
+                </div>
+
+                <div class="fake-combo mantenimientos">
+                    <div id="spacing-combo-mantenimientos">
+
+                        <div class="action-block">
+                            <div class="icon">
+                                <ion-icon name="people"></ion-icon>
+                            </div>
+
+                            <div class="link">
+                                <a th:href="@{/adminusers}">Administradores</a>
+                            </div>
+                        </div>
+
+                        <div class="action-block">
+                            <div class="icon">
+                                <ion-icon name="people"></ion-icon>
+                            </div>
+
+                            <div class="link">
+                                <a th:href="@{/customerusers}">Clientes</a>
+                            </div>
+                        </div>
+
+                        <div class="action-block">
+                            <div class="icon">
+                                <ion-icon name="restaurant"></ion-icon>
+                            </div>
+
+                            <div class="link">
+                                <a th:href="@{/reservaciones}">Reservaciones</a>
+                            </div>
+                        </div>
+
+                        <div class="action-block">
+                            <div class="icon">
+                                <ion-icon name="cart"></ion-icon>
+                            </div>
+        
+                            <div class="link">
+                                <a th:href="@{/producto}">Productos</a>
+                            </div>
+                        </div>
+        
+                        <div class="action-block">
+                            <div class="icon">
+                                <ion-icon name="bowtie"></ion-icon>
+                            </div>
+        
+                            <div class="link">
+                                <a th:href="@{/mesas}">Mesas</a>
+                            </div>
+                        </div>
+
+                        <div class="action-block">
+                            <div class="icon">
+                                <ion-icon name="filing"></ion-icon>
+                            </div>
+
+                            <div class="link">
+                                <a th:href="@{/categoria}">Categorías</a>
+                            </div>
+                        </div>
+
+                        <div class="action-block">
+                            <div class="icon">
+                                <ion-icon name="time"></ion-icon>
+                            </div>
+
+                            <div class="link">
+                                <a th:href="@{/turno}">Turnos</a>
+                            </div>
+                        </div>
+
+                        <div class="action-block">
+                            <div class="icon">
+                                <ion-icon name="pizza"></ion-icon>
+                            </div>
+
+                            <div class="link">
+                                <a th:href="@{/pedido}">Pedidos</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="action-block">
+                    <div class="icon">
+                        <ion-icon name="chatbubbles"></ion-icon>
+                    </div>
+
+                    <div class="link">
+                        <a href="">Conversaciones</a>
+                    </div>
+                </div>
+
+                <div class="action-block">
+                    <div class="icon">
+                        <ion-icon name="analytics"></ion-icon>
+                    </div>
+
+                    <div class="link">
+                        <a href="">Nuestras métricas</a>
+                    </div>
+                </div>
+
+                <div class="action-block">
+                    <div class="icon">
+                        <ion-icon name="construct"></ion-icon>
+                    </div>
+
+                    <div class="link">
+                        <a id="datos-vivian">Datos de Vivian</a>
+                    </div>
+                </div>
+                <div class="action-block">
+                    <div class="icon">
+                        <ion-icon name="power"></ion-icon>
+                    </div>
+
+                    <div class="link">
+                        <a id="cerrarsesion">Cerrar Sesion</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="min-container-icon" id="toggleMenu">
+                <ion-icon name="menu"></ion-icon>
+            </div>
+        </div>
+    </div>
+    <script th:src="@{/js/sidebar.js}"></script>
+</div>

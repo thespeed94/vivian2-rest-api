@@ -1,0 +1,174 @@
+.btn-close-modal {
+    text-decoration: none;
+    color: #333333;
+    display: inline-block;
+    border-radius: 4px;
+    border: .5px solid #333333;
+}
+
+.modal-container {
+    font-family: 'Catamaran';
+    width: 100%;
+    position: fixed;
+    background-color: rgba(100, 100, 100, .6);
+    height: 100vh;
+    top: 0;
+    left: 0;
+    display: none;
+    z-index: 1;
+}
+
+.modal-window-w2 {
+    background-color: var(--default-white);
+    width: 20%;
+    margin: 5em auto;
+    padding: 2em;
+    position: relative;
+    padding-top: 3em;
+    border-radius: 12px;
+}
+
+.modal-window-w3 {
+    background-color: var(--default-white);
+    width: 500px;
+    margin: 5em auto;
+    padding: 2em;
+    position: relative;
+    padding-top: 3em;
+    border-radius: 12px;
+}
+
+.modal-window-w5 {
+    background-color: var(--default-white);
+    width: 50%;
+    margin: 5em auto;
+    padding: 2em;
+    position: relative;
+    padding-top: 3em;
+    border-radius: 12px;
+}
+
+.modal-window-w7 {
+    background-color: var(--default-white);
+    width: 70%;
+    margin: 5em auto;
+    padding: 2em;
+    position: relative;
+    padding-top: 3em;
+    border-radius: 12px;
+}
+
+.btn-close-modal {
+    position: absolute;
+    padding: 7px 14px;
+    top: 1em;
+    right: 1em;
+}
+
+.bounce-in-modal {
+    opacity: 0;
+    animation-name: bounceIn;
+    animation-duration: 300ms;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+    animation-delay : .1s;
+}
+
+@keyframes bounceIn {
+    0%{
+        opacity: 0;
+        transform: scale(0.3) translate3d(0,0,0);
+    }
+    50%{
+        opacity: 0.9;
+        transform: scale(1.1);
+    }
+    80%{
+        opacity: 1;
+        transform: scale(0.89);
+    }
+    100%{
+        opacity: 1;
+        transform: scale(1) translate3d(0,0,0);
+    }
+}
+
+form > .fake-form {
+    margin: 1em 0;
+    height: 400px;
+    overflow-y: scroll;
+}
+
+form > .fake-form .block-modal {
+    align-items: center;
+    margin: 1em 0;
+    display: flex;
+}
+
+form > .fake-form .block-modal ion-icon {
+    color: var(--default-blue);
+    font-size: 20px;
+}
+
+form > .fake-form .block-modal > input {
+    background-color: var(--default-white);
+    width: 70%;
+    padding: 0.5em 1em;
+    margin: 1em;
+    outline: none;
+    border: 0;
+    border-bottom: 1px solid var(--default-shadow-gray);
+    transition: border-bottom .15s, box-shadow .15s linear;
+}
+
+form > .fake-form .block-modal > input:focus:valid {
+    box-shadow: 0 0 4px 1px var(--default-green);
+    border: 0;
+    border-bottom: 1px solid transparent;
+}
+
+form > .fake-form .block-modal > input:focus:invalid {
+    box-shadow: 0 0 4px 1px var(--default-red);
+    border: 0;
+    border-bottom: 1px solid transparent;
+}
+
+form > .fake-form .block-modal > select {
+    outline: none;
+    border-radius: 4px;
+    background-color: var(--default-white);
+    width: 50%;
+    padding: .5em 1em;
+    margin: 1em;
+    border: 1px solid var(--default-shadow-gray);
+}
+
+form .actions-form {
+    border-top: 1px solid var(--default-black);
+    padding: 1em 0;
+}
+
+.btn-close-modal {
+    margin-inline-end: 1em;
+    display: flex;
+    align-items: center;
+}
+
+.btn-close-modal ion-icon {
+    font-size: 20px;
+}
+
+.btn-close-modal:active {
+    color: white;
+    background-color: var(--default-blue);
+}
+
+.own-select{
+    outline: none;
+    border-radius: 4px;
+    background-color: var(--default-white);
+    width: 50%;
+    padding: .5em 1em;
+    margin: 1em;
+    border: 1px solid var(--default-shadow-gray);
+}

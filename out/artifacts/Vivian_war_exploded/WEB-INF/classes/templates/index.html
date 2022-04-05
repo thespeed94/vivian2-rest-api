@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="author" content="DonattoMinaya AdrianMauro">
+    <meta name="description" content="Página administrativa de Vivian">
+    <meta name="keywords" content="Restaurante Recetas Comida">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/initial-progress.css">
+    <link rel="stylesheet" href="css/index.css">
+    <title>Bienvenido a Vivian!</title>
+</head>
+<body>
+    <div class="container">
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Usuario</th>
+                    <th>Nombre</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="usuario:${usuarios}">
+                    <td th:text="${usuario.id}"></td>
+                    <td th:text="${usuario.email}"></td>
+                    <td th:text="${usuario.nombresUsuario}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+</html>

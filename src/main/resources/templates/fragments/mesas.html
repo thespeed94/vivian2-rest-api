@@ -1,0 +1,74 @@
+<div th:fragment="mesas">
+	<link rel="stylesheet" th:href="@{/css/libcss/own-modal.css}"
+		href="../static/css/libcss/own-modal.css">
+	<div id="fake-container-body">
+		<br>
+		<h1>Mantenimiento Mesas</h1>
+		<br> <a class="btn-open-modal btn primary" id="agregarMesa" blue>Agregar</a>
+
+		<!-- MODAL -->
+		<div class="modal-container modal-disable-close">
+			<div class="modal-window-w3">
+				<a href="#" class="btn-close-modal"> <ion-icon name="close"></ion-icon>
+				</a>
+
+				<div id="tituloForm" class="header-h2-github">Nueva Mesa</div>
+
+				<form method="post" th:action="@{/mesas}" th:object="${mesa}"
+					id="formMesas">
+					<div class="mb-3">
+						<label class="" id="labelId">ID:</label> <input type="text"
+							class="" name="id" id="txtId" value=""
+							placeholder="Ingrese el id de Mesa" readOnly>
+					</div>
+
+					<div class="fake-form">
+						<div class="block-modal">
+							<ion-icon name="piso"></ion-icon>
+							<input type="text" class="" name="piso" id="txtpiso"
+								th:field="*{piso}" maxLength="1" value=""
+								placeholder="Ingresa el piso">
+						</div>
+						<div class="block-modal">
+							<ion-icon name="capacidadPersonas"></ion-icon>
+							<input type="text" class="" name="capacidadPersonas" id="txtcapacidadpersonas"
+								th:field="*{capacidadPersonas}" maxLength="2" value=""
+								placeholder="Ingresa capacidad">
+						</div>
+					</div>
+					<div class="actions-form">
+						<button type="button" class="principal" id="btnGuardarMesa"
+							name="opcion" value="" blue>Guardar</button>
+						<button type="reset" class="ghostly" id="btnResetear">Resetear</button>
+					</div>
+				</form>
+			</div>
+		</div>
+
+		<div id="table-mesas">
+			<table class="table" id="tMesas">
+				<thead>
+					<tr>
+						<th class="text-center">Mesa</th>
+						<th class="text-center">Piso</th>
+						<th class="text-center">Capacidad</th>
+						<th class="text-center">Acciones</th>
+					</tr>
+				</thead>
+
+				<tbody style="text-align: center">
+					<tr th:each="mesa:${mesas}">
+						<td th:text="${mesa.id}"></td>
+						<td th:text="${mesa.piso}"></td>
+						<td	th:text="${mesa.capacidadPersonas}"></td>
+						<td class="text-center"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<script th:src="@{/js/mesas.js}"></script>
+	<!-- Modal propio -->
+	<script th:src="@{/js/own-modal.js}" src="../static/js/own-modal.js"></script>
+
+</div>

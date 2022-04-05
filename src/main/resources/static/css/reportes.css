@@ -1,0 +1,16 @@
+.container-padre {
+    display: flex;
+    justify-content: space-around;
+}
+
+.container-padre .container {
+    width: 750px;
+    height: 450px;
+}
+
+.container-padre canvas{
+    border: 2px solid grey;
+    border-radius: 5px;
+    padding: 10px;
+}
+

@@ -1,0 +1,4 @@
+.swal2-html-container, .swal2-input-label, .swal2-file, .swal2-input, .swal2-textarea {
+    font-family: 'system-ui' !important;
+    color: var(--default-black);
+}

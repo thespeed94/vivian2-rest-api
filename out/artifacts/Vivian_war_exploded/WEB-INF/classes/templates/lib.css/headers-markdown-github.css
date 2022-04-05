@@ -1,0 +1,20 @@
+.header-h1-github, .header-h2-github, .header-h3-github {
+    font-family: 'Catamaran' !important;
+    font-size: 2em;
+    color: var(--default-black);
+    font-weight: bold;
+    border-bottom: 1px solid var(--default-black);
+    padding: .3em 0;
+}
+
+.header-h1-github {
+    font-size: 2em;
+}
+
+.header-h2-github {
+    font-size: 1.5em;
+}
+
+.header-h3-github {
+    font-size: 1.17em;
+}

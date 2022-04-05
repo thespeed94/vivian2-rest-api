@@ -1,0 +1,51 @@
+<div th:fragment="navbar">
+    <div id="fake-header">
+        <div class="header-nav">
+            <div class="left">
+                <div class="logo">
+                    <img th:src="@{/img/corazon.jpg}" alt="logo">
+                </div>
+
+                <div class="company">
+                    <span>Vivian</span>
+                </div>
+            </div>
+
+            <div class="right">
+                <div class="icons-menu">
+                    <div class="icon">
+                        <ion-icon name="lock"></ion-icon>
+                    </div>
+                    <div class="icon">
+                        <ion-icon name="camera"></ion-icon>
+                    </div>
+
+                    <div class="icon">
+                        <ion-icon name="contrast"></ion-icon>
+                    </div>
+
+                    <div class="icon" onclick="window.location.href='https\://slack.com/intl/es-pe/'">
+                        <ion-icon name="logo-slack"></ion-icon>
+                    </div>
+
+                    <div class="icon" id="bug">
+                        <ion-icon name="bug"></ion-icon>
+                    </div>
+                </div>
+                <div id='profile'>
+                    <div class="name-profile">
+                        <span th:text="${nombreCompleto}"></span>
+                    </div>
+                    <div class="photo">
+                        <img src="https://i.ibb.co/SNzCBDK/269731.jpg" alt="269731" border="0">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Jquery CDN -->
+    <script th:src="@{/js/jquery-3.6.0.js}"></script>
+    <!-- Swal js -->
+    <script th:src="@{/js/navbar.js}"></script>
+
+</div>
