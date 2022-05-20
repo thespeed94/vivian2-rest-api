@@ -28,21 +28,22 @@ public class TurnosController {
 
 	private int codigo = 7;
 
-	public void obtenerDatosUsuario(Model model) throws Exception {
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		Optional<Usuario> usuarioSpring = usuarioService.obtenerPorEmail(auth.getName());
-		model.addAttribute("nombreCompleto",
-				usuarioSpring.get().getNombresUsuario() + " " + usuarioSpring.get().getApellidosUsuario());
-	}
+	// public void obtenerDatosUsuario(Model model) throws Exception {
+	// 	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	// 	Optional<Usuario> usuarioSpring = usuarioService.obtenerPorEmail(auth.getName());
+	// 	model.addAttribute("nombreCompleto",
+	// 			usuarioSpring.get().getNombresUsuario() + " " + usuarioSpring.get().getApellidosUsuario());
+	// }
 
-	@GetMapping("")
-	public String listar(Model model) throws Exception {
+	@GetMapping @ResponseBody
+	public ResponseEntity<List<Turno>> listarTodo() throws Exception {
+		return ResponseEntity.ok(turnoService.listarTurnos());
 
-		List<Turno> turnos = turnoService.listarTurnos();
-		model.addAttribute("turno", new Turno());
-		model.addAttribute("turnos", turnos);
-		model.addAttribute("verFragmento", codigo);
-		return "general-summary";
+		// List<Turno> turnos = turnoService.listarTurnos();
+		// model.addAttribute("turno", new Turno());
+		// model.addAttribute("turnos", turnos);
+		// model.addAttribute("verFragmento", codigo);
+		// return "general-summary";
 	}
 
 	@PostMapping("")

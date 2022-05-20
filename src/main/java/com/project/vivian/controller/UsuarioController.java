@@ -16,8 +16,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-@Controller
+@RestController
 @RequestMapping("/customerusers")
+@CrossOrigin(origins = "*")
 public class UsuarioController {
 
     @Autowired
@@ -31,14 +32,14 @@ public class UsuarioController {
         model.addAttribute("nombreCompleto",usuarioSpring.get().getNombresUsuario() + " " + usuarioSpring.get().getApellidosUsuario());
     }
 
-    @GetMapping("")
-    public String listar(Model model) throws Exception {
-        obtenerDatosUsuario(model);
-        List<Usuario> usuarios = usuarioService.obtenerCustomerUsuarios();
-        model.addAttribute("usuario",new Usuario());
-        model.addAttribute("customerusers", usuarios);
-        model.addAttribute("verFragmento",codigo);
-        return "general-summary";
+    @GetMapping() @ResponseBody
+    public ResponseEntity<List<Usuario>> listarTodos() throws Exception {
+        return ResponseEntity.ok(usuarioService.obtenerCustomerUsuarios());
+        // List<Usuario> usuarios = usuarioService.obtenerCustomerUsuarios();
+        // model.addAttribute("usuario",new Usuario());
+        // model.addAttribute("customerusers", usuarios);
+        // model.addAttribute("verFragmento",codigo);
+        // return "general-summary";
     }
 
     @PostMapping("")
