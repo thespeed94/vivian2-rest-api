@@ -1,21 +1,16 @@
 package com.project.vivian.controller;
 
 
-import com.project.vivian.entidad.Categoria;
 import com.project.vivian.entidad.Producto;
 import com.project.vivian.entidad.general.Confirmacion;
 import com.project.vivian.service.CategoriaService;
 import com.project.vivian.service.ProductoService;
 import com.project.vivian.service.constants.ResponseEstado;
-import org.dom4j.rule.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -33,13 +28,12 @@ public class ProductoController {
     @GetMapping("")
     public List<Producto> listar() throws Exception {
 
-        List<Producto> productos = productoService.obtenerProductos();
-        return productos;
+        return productoService.obtenerProductos();
     }
 
 
     @PostMapping("")
-    public ResponseEntity<Confirmacion> insertarProducto(Producto producto) throws Exception {
+    public ResponseEntity<Confirmacion> insertarProducto(@RequestBody Producto producto) throws Exception {
         Confirmacion confirmacion = new Confirmacion();
         try {
             productoService.agregarProducto(producto);
@@ -57,7 +51,7 @@ public class ProductoController {
     }
 
     @PutMapping("")
-    public ResponseEntity<Confirmacion> actualizarProducto(Producto producto) throws Exception {
+    public ResponseEntity<Confirmacion> actualizarProducto(@RequestBody Producto producto) throws Exception {
         Confirmacion confirmacion = new Confirmacion();
         try {
             productoService.actualizarProducto(producto);
@@ -83,7 +77,7 @@ public class ProductoController {
                 confirmacion.setMensaje("Producto eliminado correctamente.");
             } else {
                 confirmacion.setEstado(ResponseEstado.ERROR_NEGOCIO);
-                confirmacion.setMensaje("Error al eliminar el producto.");
+                confirmacion.setMensaje("El producto no existe.");
             }
             return ResponseEntity.accepted().body(confirmacion);
         } catch (Exception ex) {
