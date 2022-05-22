@@ -46,8 +46,8 @@ public class ProductoController {
 
             confirmacion.setEstado(ResponseEstado.OK);
             confirmacion.setMensaje("Producto ingresado correctamente.");
-
-            return ResponseEntity.accepted().body(confirmacion);
+            
+            return ResponseEntity.accepted().body(confirmacion);            
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
             confirmacion.setEstado(ResponseEstado.ERROR_APLICACION);
