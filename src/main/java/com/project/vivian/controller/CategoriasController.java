@@ -1,6 +1,7 @@
 package com.project.vivian.controller;
 
 import com.project.vivian.entidad.Categoria;
+
 import com.project.vivian.entidad.Turno;
 import com.project.vivian.entidad.Usuario;
 import com.project.vivian.entidad.general.Confirmacion;
@@ -19,26 +20,24 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-@Controller
+@CrossOrigin(origins = "*")
+@RestController
 @RequestMapping("/categoria")
 public class CategoriasController {
+	
 	@Autowired
 	private CategoriaService categoriaService;
 
 	private int codigo = 6;
 
-	@GetMapping("")
-	public String listar(Model model) throws Exception {
+	@GetMapping @ResponseBody
+	public ResponseEntity<List<Categoria>> listar() throws Exception {
 
-		List<Categoria> categorias = categoriaService.obtenerCategorias();
-		model.addAttribute("categoria", new Categoria());
-		model.addAttribute("categorias", categorias);
-		model.addAttribute("verFragmento", codigo);
-		return "general-summary";
+		return ResponseEntity.ok(categoriaService.obtenerCategorias());
 	}
 
 	@PostMapping("")
-	public ResponseEntity<Confirmacion> insertarCategoria(Categoria categoria) throws Exception {
+	public ResponseEntity<Confirmacion> insertarCategoria(@RequestBody Categoria categoria) throws Exception {
 		Confirmacion confirmacion = new Confirmacion();
 		try {
 			categoriaService.agregarCategoria(categoria);
@@ -56,7 +55,7 @@ public class CategoriasController {
 	}
 
 	@PutMapping("")
-	public ResponseEntity<Confirmacion> actualizarCategoria(Categoria categoria) throws Exception {
+	public ResponseEntity<Confirmacion> actualizarCategoria(@RequestBody Categoria categoria) throws Exception {
 		Confirmacion confirmacion = new Confirmacion();
 		try {
 			categoriaService.actualizarCategoria(categoria);
@@ -73,12 +72,15 @@ public class CategoriasController {
 		}
 	}
 
-	@DeleteMapping("")
-	public ResponseEntity<Confirmacion> deleteAdminUser(@RequestParam Integer id) throws Exception {
+	
+	@DeleteMapping("/{id}")
+	@ResponseBody
+	public ResponseEntity<Confirmacion> deleteCategoria(@PathVariable("id") String id) throws Exception {
 		Confirmacion confirmacion = new Confirmacion();
 		try {
-			if (categoriaService.eliminarCategoria(id)>0){
-					confirmacion.setEstado(ResponseEstado.OK);
+			Integer NewID=Integer.parseInt(id);
+			if (categoriaService.eliminarCategoria(NewID)>0){
+				confirmacion.setEstado(ResponseEstado.OK);
 				confirmacion.setMensaje("Categoria eliminada correctamente.");
 			} else {
 				confirmacion.setEstado(ResponseEstado.ERROR_NEGOCIO);

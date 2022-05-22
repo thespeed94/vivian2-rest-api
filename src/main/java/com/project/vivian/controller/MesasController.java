@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-
-@Controller
+@CrossOrigin(origins = "*")
+@RestController
 @RequestMapping("/mesas")
 public class MesasController {
 
@@ -28,25 +28,20 @@ public class MesasController {
 
 	private int codigo = 5;
 
-	@GetMapping("")
-	public String listar(Model model) throws Exception {
+	@ResponseBody @GetMapping
+	public ResponseEntity<List<Mesa>> listar() throws Exception {
 
-		List<Mesa> mesas = mesaService.listarMesas();
-		
-		model.addAttribute("mesa", new Mesa());
-		model.addAttribute("mesas", mesas);
-		model.addAttribute("verFragmento", codigo);
-		return "general-summary";
+		return ResponseEntity.ok(mesaService.listarMesas());
 	}
 
 	@PostMapping("")
-	public ResponseEntity<Confirmacion> insertarMesa(@RequestParam String json) throws Exception {
+	public ResponseEntity<Confirmacion> insertarMesa(@RequestBody Mesa mesa) throws Exception {
 		Confirmacion confirmacion = new Confirmacion();
 		try {
-			Mesa mesa = new ObjectMapper().readValue(json, Mesa.class);
 			mesaService.crearMesa(mesa);
+			
 			confirmacion.setEstado(ResponseEstado.OK);
-			confirmacion.setMensaje("Mesa ingresada correctamente.");
+			confirmacion.setMensaje("Mesa Ingresada correctamente.");
 
 			return ResponseEntity.accepted().body(confirmacion);
 		} catch (Exception ex) {
@@ -58,11 +53,9 @@ public class MesasController {
 	}
 
 	@PutMapping("")
-	public ResponseEntity<Confirmacion> updateMesa(String json) throws Exception {
+	public ResponseEntity<Confirmacion> ActualizarMesa(@RequestBody Mesa mesa) throws Exception {
 		Confirmacion confirmacion = new Confirmacion();
 		try {
-			Mesa mesa = new ObjectMapper().readValue(json, Mesa.class);
-
 			mesaService.actualizarMesa(mesa);
 			confirmacion.setEstado(ResponseEstado.OK);
 			confirmacion.setMensaje("Mesa actualizada correctamente.");
@@ -76,8 +69,8 @@ public class MesasController {
 		}
 	}
 
-	@DeleteMapping("")
-	public ResponseEntity<Confirmacion> deleteReserva(@RequestParam Integer id) throws Exception {
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Confirmacion> deleteReserva(@PathVariable("id") Integer id) throws Exception {
 		Confirmacion confirmacion = new Confirmacion();
 		Mesa mesa= new Mesa();
 		mesa.setId(id);
