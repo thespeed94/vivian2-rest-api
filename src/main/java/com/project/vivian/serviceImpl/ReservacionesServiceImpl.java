@@ -79,7 +79,7 @@ public class ReservacionesServiceImpl implements ReservacionesService {
 	public boolean existeCruceReserva(Reserva reserva) throws Exception {
 		boolean existeCruce=false;
 		try {
-			System.out.println(">>> "+ reserva.getFechaReservacion() + "  "+ reserva.getTurno().getId() + "   " + reserva.getnMesa());
+			System.out.println(">>> fecha:"+ reserva.getFechaReservacion() + "  idTurno:"+ reserva.getTurno().getId() + "   Mesa:" + reserva.getnMesa());
 			existeCruce=reservacionesDAO.ExisteCruceReserva(reserva.getFechaReservacion(), reserva.getTurno().getId(), reserva.getnMesa());
 			return existeCruce;
 		}catch (Exception e) {
