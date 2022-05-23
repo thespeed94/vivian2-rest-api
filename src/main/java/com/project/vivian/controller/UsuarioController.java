@@ -1,7 +1,5 @@
 package com.project.vivian.controller;
-
 import com.project.vivian.entidad.Usuario;
-import com.project.vivian.entidad.UsuarioSpring;
 import com.project.vivian.entidad.general.Confirmacion;
 import com.project.vivian.service.UsuarioService;
 import com.project.vivian.service.constants.ResponseEstado;
@@ -9,10 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,58 +19,32 @@ import java.util.Optional;
 @CrossOrigin(origins = "*")
 public class UsuarioController {
 
+    HashMap<String, Object> output = new HashMap<String, Object>();
+
     @Autowired
     private UsuarioService usuarioService;
 
-    private int codigo = 2;
-
-    public void obtenerDatosUsuario(Model model) throws Exception {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Optional<Usuario> usuarioSpring = usuarioService.obtenerPorEmail(auth.getName());
-        model.addAttribute("nombreCompleto",usuarioSpring.get().getNombresUsuario() + " " + usuarioSpring.get().getApellidosUsuario());
-    }
-
-    @GetMapping() @ResponseBody
+    @GetMapping @ResponseBody
     public ResponseEntity<List<Usuario>> listarTodos() throws Exception {
         return ResponseEntity.ok(usuarioService.obtenerCustomerUsuarios());
-        // List<Usuario> usuarios = usuarioService.obtenerCustomerUsuarios();
-        // model.addAttribute("usuario",new Usuario());
-        // model.addAttribute("customerusers", usuarios);
-        // model.addAttribute("verFragmento",codigo);
-        // return "general-summary";
     }
 
-    @PostMapping("")
-    public ResponseEntity<Confirmacion> insertarCustomerUser(Usuario usuario) throws Exception {
-        Confirmacion confirmacion = new Confirmacion();
-        try{
-            Optional<Usuario> usuarioEmail = usuarioService.obtenerPorEmail(usuario.getEmail());
-            if (usuarioEmail.isPresent()){
-                confirmacion.setEstado(ResponseEstado.ERROR_NEGOCIO);
-                confirmacion.setMensaje("El usuario ya existe.");
-            } else {
-                Optional<Usuario> usuarioDni = usuarioService.obtenerPorDni(usuario.getDni());
-                if (usuarioDni.isPresent()){
-                    confirmacion.setEstado(ResponseEstado.ERROR_NEGOCIO);
-                    confirmacion.setMensaje("El DNI ya existe.");
-                } else {
-                    Integer usuarioCreated = usuarioService.crearCustomerUsuario(usuario);
-                    if (usuarioCreated != 0){
-                        confirmacion.setEstado(ResponseEstado.OK);
-                        confirmacion.setMensaje("Usuario ingresado correctamente.");
-                    }
-                }
-            }
-            return ResponseEntity.accepted().body(confirmacion);
-        }catch (Exception ex){
-            System.out.println(ex.getMessage());
-            confirmacion.setEstado(ResponseEstado.ERROR_APLICACION);
-            confirmacion.setMensaje(ex.getMessage());
-            return ResponseEntity.badRequest().body(confirmacion);
+    @PostMapping @ResponseBody
+    public ResponseEntity<HashMap<String, Object>> insertarCustomerUser(@RequestBody Usuario u) throws Exception {
+        try {
+            usuarioService.crearCustomerUsuario(u);
+            output.put("msg", "insertado correcto");
         }
+
+        catch(Exception e) {
+            e.printStackTrace();
+            output.put("msg", e.getMessage());
+        }
+
+        return ResponseEntity.ok(output);
     }
 
-    @DeleteMapping("")
+    @DeleteMapping @ResponseBody
     public ResponseEntity<Confirmacion> deleteCustomerUser(@RequestParam Integer id) throws Exception {
         Confirmacion confirmacion = new Confirmacion();
         try{
