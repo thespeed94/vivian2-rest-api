@@ -1,32 +1,30 @@
 package com.project.vivian.controller;
 
 import com.project.vivian.entidad.Turno;
-import com.project.vivian.entidad.Usuario;
 import com.project.vivian.entidad.general.Confirmacion;
 import com.project.vivian.service.TurnoService;
-import com.project.vivian.service.UsuarioService;
 import com.project.vivian.service.constants.ResponseEstado;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/turno")
 public class TurnosController {
+
 	@Autowired
 	private TurnoService turnoService;
 
-	@Autowired
-	private UsuarioService usuarioService;
+	HashMap<String, Object> output = new HashMap<String, Object>();
 
-	private int codigo = 7;
+	// @Autowired
+	// private UsuarioService usuarioService;
+
+	// private int codigo = 7;
 
 	// public void obtenerDatosUsuario(Model model) throws Exception {
 	// 	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -46,25 +44,20 @@ public class TurnosController {
 		// return "general-summary";
 	}
 
-	@PostMapping("")
-	public ResponseEntity<Confirmacion> insertarTurno(Turno turno) throws Exception {
-		Confirmacion confirmacion = new Confirmacion();
+	@PostMapping @ResponseBody
+	public ResponseEntity<HashMap<String, Object>> insertarTurno(@RequestBody Turno t) throws Exception {
 		try {
-			if(turnoService.agregarTurno(turno)==1) {
-				confirmacion.setEstado(ResponseEstado.OK);
-				confirmacion.setMensaje("Turno ingresado correctamente.");
-			}else {	
-				confirmacion.setEstado(ResponseEstado.ERROR_NEGOCIO);
-				confirmacion.setMensaje("No se pudo registrar el Turno");
-			}
-
-			return ResponseEntity.accepted().body(confirmacion);
-		} catch (Exception ex) {
-			System.out.println(ex.getMessage());
-			confirmacion.setEstado(ResponseEstado.ERROR_APLICACION);
-			confirmacion.setMensaje(ex.getMessage());
-			return ResponseEntity.badRequest().body(confirmacion);
+			t.setId(turnoService.darId());
+			turnoService.agregarTurno(t);
+			output.put("msg", "Insert successful");
 		}
+
+		catch(Exception e) {
+			e.printStackTrace();
+			output.put("msg", "Descripción de turno duplicado");
+		}
+
+		return ResponseEntity.ok(output);
 	}
 	
 	@PutMapping("")

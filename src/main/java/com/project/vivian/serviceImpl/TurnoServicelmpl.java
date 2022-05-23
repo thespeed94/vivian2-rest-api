@@ -15,15 +15,21 @@ public class TurnoServicelmpl implements TurnoService {
     private TurnosDAO turnoDAO;
 
 	@Override
-	public Integer agregarTurno(Turno turno) throws Exception {
+	public Turno agregarTurno(Turno turno) throws Exception {
         try {
-
-        	String id = turnoDAO.obtenerUltimoId();
-            return turnoDAO.saveTurno(id,turno.getDescripcion(),turno.getHorario());
-        }catch (Exception ex){
+        	return turnoDAO.save(turno);
+            //return turnoDAO.saveTurno(id,turno.getDescripcion(),turno.getHorario());
+        }
+        
+        catch (Exception ex){
             throw new Exception(ex.getMessage());
         }
 	}
+
+    @Override
+    public String darId() {
+        return turnoDAO.obtenerUltimoId();
+    }
 
 	@Override
 	public List<Turno> listarTurnos() throws Exception {
