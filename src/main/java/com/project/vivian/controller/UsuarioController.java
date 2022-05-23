@@ -44,24 +44,19 @@ public class UsuarioController {
         return ResponseEntity.ok(output);
     }
 
-    @DeleteMapping @ResponseBody
-    public ResponseEntity<Confirmacion> deleteCustomerUser(@RequestParam Integer id) throws Exception {
-        Confirmacion confirmacion = new Confirmacion();
-        try{
-            if (usuarioService.eliminarPorId(id)){
-                confirmacion.setEstado(ResponseEstado.OK);
-                confirmacion.setMensaje("Usuario eliminado correctamente.");
-            } else {
-                confirmacion.setEstado(ResponseEstado.ERROR_NEGOCIO);
-                confirmacion.setMensaje("Error al eliminar el usuario.");
-            }
-            return ResponseEntity.accepted().body(confirmacion);
-        }catch (Exception ex){
-            System.out.println(ex.getMessage());
-            confirmacion.setEstado(ResponseEstado.ERROR_APLICACION);
-            confirmacion.setMensaje(ex.getMessage());
-            return ResponseEntity.badRequest().body(confirmacion);
+    @DeleteMapping("/{id}") @ResponseBody
+    public ResponseEntity<HashMap<String, Object>> deleteCustomerUser(@PathVariable int id) throws Exception {
+        try {
+            usuarioService.eliminarPorId(id);
+            output.put("msg", "Usuario eliminado");
         }
+
+        catch(Exception e) {
+            e.printStackTrace();
+            output.put("msg", e.getMessage());
+        }
+
+        return ResponseEntity.ok(output);
     }
 
     @PutMapping("")
