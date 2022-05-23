@@ -60,25 +60,19 @@ public class TurnosController {
 		return ResponseEntity.ok(output);
 	}
 	
-	@PutMapping("")
-	public ResponseEntity<Confirmacion> actualizarTurno(Turno turno) throws Exception {
-		Confirmacion confirmacion = new Confirmacion();
+	@PutMapping @ResponseBody
+	public ResponseEntity<HashMap<String, Object>> actualizarTurno(@RequestBody Turno t) throws Exception {
 		try {
-			if(turnoService.actualizarTurno(turno)>0) {
-				confirmacion.setEstado(ResponseEstado.OK);
-				confirmacion.setMensaje("Turno actualizado correctamente.");
-			}else {	
-				confirmacion.setEstado(ResponseEstado.ERROR_NEGOCIO);
-				confirmacion.setMensaje("No se pudo actualizar el Turno");
-			}
-
-			return ResponseEntity.accepted().body(confirmacion);
-		} catch (Exception ex) {
-			System.out.println(ex.getMessage());
-			confirmacion.setEstado(ResponseEstado.ERROR_APLICACION);
-			confirmacion.setMensaje(ex.getMessage());
-			return ResponseEntity.badRequest().body(confirmacion);
+			turnoService.agregarTurno(t);
+			output.put("msg", "Updated successful");
 		}
+
+		catch(Exception e) {
+			e.printStackTrace();
+			output.put("msg", "Descripción de turno duplicado");
+		}
+
+		return ResponseEntity.ok(output);
 	}
 	
 	@DeleteMapping("")
