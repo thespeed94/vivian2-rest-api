@@ -1,9 +1,6 @@
 package com.project.vivian.controller;
-
 import com.project.vivian.entidad.Turno;
-import com.project.vivian.entidad.general.Confirmacion;
 import com.project.vivian.service.TurnoService;
-import com.project.vivian.service.constants.ResponseEstado;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -11,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
+// import java.util.Optional;
 
 @Controller
 @RequestMapping("/turno")
@@ -21,27 +19,9 @@ public class TurnosController {
 
 	HashMap<String, Object> output = new HashMap<String, Object>();
 
-	// @Autowired
-	// private UsuarioService usuarioService;
-
-	// private int codigo = 7;
-
-	// public void obtenerDatosUsuario(Model model) throws Exception {
-	// 	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	// 	Optional<Usuario> usuarioSpring = usuarioService.obtenerPorEmail(auth.getName());
-	// 	model.addAttribute("nombreCompleto",
-	// 			usuarioSpring.get().getNombresUsuario() + " " + usuarioSpring.get().getApellidosUsuario());
-	// }
-
 	@GetMapping @ResponseBody
 	public ResponseEntity<List<Turno>> listarTodo() throws Exception {
 		return ResponseEntity.ok(turnoService.listarTurnos());
-
-		// List<Turno> turnos = turnoService.listarTurnos();
-		// model.addAttribute("turno", new Turno());
-		// model.addAttribute("turnos", turnos);
-		// model.addAttribute("verFragmento", codigo);
-		// return "general-summary";
 	}
 
 	@PostMapping @ResponseBody
@@ -64,7 +44,7 @@ public class TurnosController {
 	public ResponseEntity<HashMap<String, Object>> actualizarTurno(@RequestBody Turno t) throws Exception {
 		try {
 			turnoService.agregarTurno(t);
-			output.put("msg", "Updated successful");
+			output.put("msg", "Actualización exitosa");
 		}
 
 		catch(Exception e) {
@@ -75,25 +55,30 @@ public class TurnosController {
 		return ResponseEntity.ok(output);
 	}
 	
-	@DeleteMapping("")
-	public ResponseEntity<Confirmacion> eliminarTurno(int id) throws Exception {
-		Confirmacion confirmacion = new Confirmacion();
+	@DeleteMapping("/{id}") @ResponseBody
+	public ResponseEntity<HashMap<String, Object>>  eliminarTurno(@PathVariable Integer id) throws Exception {
 		try {
-			if(turnoService.eliminarTurno(id)>0) {
-				confirmacion.setEstado(ResponseEstado.OK);
-				confirmacion.setMensaje("Turno eliminado correctamente.");
-			}else {	
-				confirmacion.setEstado(ResponseEstado.ERROR_NEGOCIO);
-				confirmacion.setMensaje("No se pudo eliminar el Turno");
-			}
+			turnoService.eliminarTurno(id);
+			output.put("msg", "Eliminado exitoso");
+			// Optional<Turno> opt = turnoService.listarPorId(id);
 
-			return ResponseEntity.accepted().body(confirmacion);
-		} catch (Exception ex) {
-			System.out.println(ex.getMessage());
-			confirmacion.setEstado(ResponseEstado.ERROR_APLICACION);
-			confirmacion.setMensaje(ex.getMessage());
-			return ResponseEntity.badRequest().body(confirmacion);
+			// if(opt.isPresent()) {
+			// 	turnoService.eliminarTurno(id);
+			// 	output.put("msg", "Eliminado exitoso");
+			// }
+
+			// else {
+			// 	output.put("msg", "El id " + id  + " no existe");
+			// }
 		}
+
+		catch(Exception e) {
+			e.printStackTrace();
+			System.out.println(id.getClass().getSimpleName());
+			output.put("msg", e.getMessage());
+		}
+
+		return ResponseEntity.ok(output);
 	}
 
 }

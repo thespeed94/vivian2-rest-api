@@ -427,7 +427,7 @@ drop procedure if exists Vivian.VerDetallePedido /
 create procedure VerDetallePedido(thisId int)
 begin
 	select *  from detalles_pedido where idPedido = thisId;
-END; /
+end /
 
 
 
@@ -443,19 +443,19 @@ begin
 	join Producto pro on pro.idProducto = dp.idProducto
 	group by month(pe.fechaCompra)
 	order by month(pe.fechaCompra);
-END; /
+end /
 
 Delimiter /
 drop procedure if exists Vivian.ReporteTopProductosIngresos /
 create procedure ReporteTopProductosIngresos()
 begin
 	select pro.nombreProducto, sum(dp.precioTotal)
-from Pedido pe join detalles_pedido dp on pe.idPedido = dp.idPedido
-join Producto pro on pro.idProducto = dp.idProducto
-group by pro.idProducto
-order by sum(dp.precioTotal) desc
-limit 5;
-END; /
+	from Pedido pe join detalles_pedido dp on pe.idPedido = dp.idPedido
+	join Producto pro on pro.idProducto = dp.idProducto
+	group by pro.idProducto
+	order by sum(dp.precioTotal) desc
+	limit 5;
+end /
 
 Delimiter /
 drop procedure if exists Vivian.ReporteTopProductosVendidosPorMes /
@@ -467,7 +467,7 @@ begin
 	where month(pe.fechaCompra) = thisMes
 	group by pro.idProducto
 	order by sum(dp.cantidad) desc;
-END; /
+end /
 
 
 Delimiter /
