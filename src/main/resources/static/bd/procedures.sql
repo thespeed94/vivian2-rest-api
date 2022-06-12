@@ -387,7 +387,7 @@ begin
 	INSERT INTO Turno (idTurno,descripcion,horario) VALUES (thisCodigo,descripcion,horario);
     SET valido = 1;
     SELECT valido;
-END;
+END /
 
 Delimiter /
 drop procedure if exists Vivian.ObtenerUltimoIdTurno /
@@ -395,7 +395,7 @@ create procedure ObtenerUltimoIdTurno(out id varchar(30))
 begin
     SET id = (SELECT  idTurno+1 FROM Turno order by idTurno DESC LIMIT 1);
     SELECT id;
-END;
+END /
 
 
 Delimiter /
@@ -405,7 +405,7 @@ begin
     DELETE FROM turno WHERE idTurno=id;
     set valido =1;
     SELECT valido;
-END;
+END /
 
 
 
@@ -419,7 +419,7 @@ begin
 	INSERT INTO Pago(monto) VALUES (thisMonto);
     SET lastId = last_insert_id();
     SELECT lastId;
-END;
+END /
 
 
 Delimiter /
@@ -427,7 +427,7 @@ drop procedure if exists Vivian.VerDetallePedido /
 create procedure VerDetallePedido(thisId int)
 begin
 	select *  from detalles_pedido where idPedido = thisId;
-END; /
+end /
 
 
 
@@ -443,19 +443,19 @@ begin
 	join Producto pro on pro.idProducto = dp.idProducto
 	group by month(pe.fechaCompra)
 	order by month(pe.fechaCompra);
-END; /
+end /
 
 Delimiter /
 drop procedure if exists Vivian.ReporteTopProductosIngresos /
 create procedure ReporteTopProductosIngresos()
 begin
 	select pro.nombreProducto, sum(dp.precioTotal)
-from Pedido pe join detalles_pedido dp on pe.idPedido = dp.idPedido
-join Producto pro on pro.idProducto = dp.idProducto
-group by pro.idProducto
-order by sum(dp.precioTotal) desc
-limit 5;
-END; /
+	from Pedido pe join detalles_pedido dp on pe.idPedido = dp.idPedido
+	join Producto pro on pro.idProducto = dp.idProducto
+	group by pro.idProducto
+	order by sum(dp.precioTotal) desc
+	limit 5;
+end /
 
 Delimiter /
 drop procedure if exists Vivian.ReporteTopProductosVendidosPorMes /
@@ -467,7 +467,7 @@ begin
 	where month(pe.fechaCompra) = thisMes
 	group by pro.idProducto
 	order by sum(dp.cantidad) desc;
-END; /
+end /
 
 
 Delimiter /
