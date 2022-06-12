@@ -1,5 +1,6 @@
 package com.project.vivian.controller;
 
+import com.project.vivian.dto.request.Login;
 import com.project.vivian.entidad.*;
 import com.project.vivian.entidad.general.Confirmacion;
 import com.project.vivian.service.UsuarioSpringService;
@@ -17,6 +18,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/usuario")
+@CrossOrigin(origins = "*")
 public class UsuarioSpringController {
 
     @Autowired
@@ -26,15 +28,16 @@ public class UsuarioSpringController {
 
     String userDesencriptado = "";
 
-    @GetMapping("/login")
-    public ResponseEntity<Map<String, Object>> login(@RequestParam String username, @RequestParam String password) {
+    @PostMapping("/login")
+    public ResponseEntity<Map<String, Object>> login(@RequestBody Login login) {
         Map<String, Object> response = new HashMap<>();
         String str;
+        System.out.println(login.getUsername());
         try {
-            str = usuarioSpringService.login(username, password);
+            str = usuarioSpringService.login(login.getUsername(), login.getPassword());
             if (str.equals("-1") || str.equals("0")) {
                 response.put("estado", ResponseEstado.ERROR_NEGOCIO);
-                response.put("mensaje", "El usuario no existe");
+                response.put("mensaje", "Usuario y/o contraseña incorrecta");
             } else {
                 response.put("estado", ResponseEstado.OK);
                 response.put("mensaje", "Usuario logeado correctamente");
@@ -139,7 +142,7 @@ public class UsuarioSpringController {
             Optional<UsuarioSpring> usuarioEmail = usuarioSpringService.obtenerPorEmail(usuarioSpring.getUsername());
             if (usuarioEmail.isPresent()) {
                 confirmacion.setEstado(ResponseEstado.ERROR_NEGOCIO);
-                confirmacion.setMensaje("El usuario ya existe.");
+                confirmacion.setMensaje("El username ya existe.");
             } else {
                 UsuarioSpring usuarioDni = usuarioSpringService.obtenerPorDni(usuarioSpring.getDni());
                 if (usuarioDni != null) {
