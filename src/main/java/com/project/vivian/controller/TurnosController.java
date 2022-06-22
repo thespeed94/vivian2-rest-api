@@ -12,6 +12,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/turno")
+@CrossOrigin(origins = "*")
 public class TurnosController {
 
 	@Autowired

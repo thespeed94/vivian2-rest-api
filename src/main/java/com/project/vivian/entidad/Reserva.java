@@ -8,7 +8,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 
-//wdwdwdwdwdwdwdw
 @Table(name = "Reserva")
 @Entity
 public class Reserva {

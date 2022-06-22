@@ -26,6 +26,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/reservaciones")
+@CrossOrigin(origins = "*")
 public class ReservasController {
 
 	@Autowired
@@ -40,9 +41,9 @@ public class ReservasController {
 	private int codigo = 3;
 	
 	@GetMapping @ResponseBody
-    public ResponseEntity<List<Reserva>> listar() throws Exception {
+    public List<Reserva> listar() throws Exception {
 
-        return ResponseEntity.ok(reservacionesService.obtenerReservaciones());
+        return reservacionesService.obtenerReservaciones();
     }
 
 	
@@ -60,7 +61,7 @@ public class ReservasController {
                     confirmacion.setMensaje("Reserva ingresada correctamente.");
                     return ResponseEntity.accepted().body(confirmacion);
             	} else {
-            		confirmacion.setEstado(ResponseEstado.ERROR_APLICACION);
+            		confirmacion.setEstado(ResponseEstado.ERROR_NEGOCIO);
                     confirmacion.setMensaje("Ya existe una reserva.");
                     return ResponseEntity.badRequest().body(confirmacion);
             	}
