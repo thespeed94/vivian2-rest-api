@@ -27,6 +27,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         String[] resources = new String[]{
                 "/include/**","/css/**","/icons/**","/img/**","/js/**", "/js/reportes/**", "/layer/**","/css/libcss/**"
         };
+        http.headers().frameOptions().disable();
 
         http
                 .authorizeRequests()

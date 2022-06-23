@@ -13,7 +13,11 @@ import com.project.vivian.service.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
+
+import java.awt.image.RenderedImage;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -192,6 +196,141 @@ public class PedidoServiceImpl implements PedidoService {
         }catch (Exception ex){
             throw new Exception(ex.getMessage());
         }
+
+    }
+    
+    
+    
+    public ByteArrayInputStream openPdfTwo(Integer id) throws Exception {
+    	Document document = new Document(PageSize.A4);
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        
+        try {
+        	
+            System.out.println("Iniciamos consulta");
+        	List<DetallesPedido> detallesPdf = obtenerDetalles(id);
+            Pedido pedido = obtenerPedidoPorId(id);
+            System.out.println("Terminamos consulta");
+
+            PdfWriter.getInstance(document, out);
+            document.open();
+            document.setMargins(75, 36, 75, 36);
+            com.itextpdf.text.Font negrita = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 12);
+            com.itextpdf.text.Font rucFont = FontFactory.getFont(FontFactory.HELVETICA, 11);
+            com.itextpdf.text.Font datosBoleta = FontFactory.getFont(FontFactory.HELVETICA, 13);
+            com.itextpdf.text.Font tituloBoletaVenta = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 14);
+            com.itextpdf.text.Font montoTotalFont = FontFactory.getFont(FontFactory.HELVETICA, 16);
+            com.itextpdf.text.Font tituloBodega = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 28);
+            document.addTitle("Boleta");
+            System.out.println("pdf 1");
+            
+            
+            URL imageURL = new URL("https://banexcoin.sgp1.digitaloceanspaces.com/banexcoinweb/corazon_img.jpeg");
+            // Case 1
+            RenderedImage imgpre = ImageIO.read(imageURL);
+            ByteArrayOutputStream baos=new ByteArrayOutputStream();
+            ImageIO.write(imgpre, "jpg", baos );
+            byte[] imageInByte=baos.toByteArray();
+            
+            
+            Image img = Image.getInstance(imageInByte);
+
+            img.scaleAbsolute(70f, 70f);
+            img.setAlignment(Element.ALIGN_CENTER);
+            System.out.println(img);
+            
+            String padded = String.format("%07d" , id);
+            System.out.println("pdf 3");
+
+            PdfPTable tableCabecera = new PdfPTable(3);
+            tableCabecera.setWidthPercentage(100);
+            tableCabecera.setTotalWidth(new float[]{ 65, 25, 75});
+            tableCabecera.addCell(getCell("CIBERADMIN\n","Jr. Rafael Saucedo #7071\nSAN ISIDRO - LIMA - LIMA", PdfPCell.ALIGN_LEFT,tituloBodega,datosBoleta));
+            
+            	tableCabecera.addCell(getCellImg(img,PdfPCell.ALIGN_CENTER));
+            
+            
+            
+            tableCabecera.addCell(getCell2("RUC 20503644968","BOLETA DE VENTA ELECTRONICA\n","B001-  N° "+padded, PdfPCell.ALIGN_CENTER,tituloBoletaVenta,datosBoleta,rucFont));
+            tableCabecera.setSpacingAfter(15f);
+            document.add(tableCabecera);
+            System.out.println("pdf 4");
+
+            //DottedLineSeparator separator = new DottedLineSeparator();
+            LineSeparator separator= new LineSeparator();
+            separator.setPercentage(25500f / 255f);
+            Chunk linebreak = new Chunk(separator);
+            document.add(linebreak);
+            
+            System.out.println("pdf 5");
+
+            PdfPTable tableDescripcion = new PdfPTable(2);
+            tableDescripcion.setWidthPercentage(100);
+            tableDescripcion.setTotalWidth(new float[]{75,75});
+            tableDescripcion.addCell(getCell("Cliente: "+pedido.getIdUsuario().getNombresUsuario()+" "+pedido.getIdUsuario().getApellidosUsuario(),
+                    "DNI: "+pedido.getIdUsuario().getDni()+"\nTelefono: "+pedido.getIdUsuario().getTelefono(), PdfPCell.ALIGN_LEFT,datosBoleta,datosBoleta));
+            tableDescripcion.addCell(getCell("Fecha de compra: \n",pedido.fechaString(), PdfPCell.ALIGN_RIGHT,datosBoleta,datosBoleta));
+            tableDescripcion.setSpacingAfter(15f);
+            document.add(tableDescripcion);
+            
+            System.out.println("pdf 6");
+
+            LineSeparator separator2= new LineSeparator();
+            separator.setPercentage(25500f / 255f);
+            Chunk linebreak2 = new Chunk(separator2);
+            document.add(linebreak2);
+            
+            System.out.println("pdf 7");
+
+            PdfPTable tableDetalle=new PdfPTable(4);
+            tableDetalle.setTotalWidth(new float[]{ 90, 240 ,90,90});
+            tableDetalle.setLockedWidth(true);
+            PdfPCell cell = new  PdfPCell(new Phrase("CANTIDAD",negrita));
+            cell.setFixedHeight(20);
+            tableDetalle.addCell(cell);
+            cell = new  PdfPCell(new Phrase("DESCRIPCION",negrita));
+            cell.setFixedHeight(20);
+            tableDetalle.addCell(cell);
+            cell = new  PdfPCell(new Phrase("P. UNIT",negrita));
+            cell.setFixedHeight(20);
+            tableDetalle.addCell(cell);
+            cell = new  PdfPCell(new Phrase("SUBTOTAL",negrita));
+            cell.setFixedHeight(20);
+            tableDetalle.addCell(cell);
+            
+            System.out.println("pdf 8");
+
+            double montoTotal=0;
+            for(DetallesPedido detalle:detallesPdf){
+                tableDetalle.addCell(new Phrase(detalle.getCantidad()+"",datosBoleta));
+                tableDetalle.addCell(new Phrase(detalle.getIdProducto().getNombreProducto()+"",datosBoleta));
+                tableDetalle.addCell(new Phrase("S/ "+detalle.getPrecio(),datosBoleta));
+                tableDetalle.addCell(new Phrase("S/ "+detalle.getPrecio()*detalle.getCantidad()+"",datosBoleta));
+                montoTotal+=detalle.getPrecioTotal()*detalle.getCantidad();
+            }
+            
+            System.out.println("pdf 9");
+            
+            tableDetalle.setSpacingBefore(20f);
+            tableDetalle.setSpacingAfter(40f);
+            document.add(tableDetalle);
+            
+            System.out.println("pdf 10");
+
+            Paragraph fraseMonto= new Paragraph();
+            fraseMonto.add(Chunk.NEWLINE);
+            fraseMonto.add(new Phrase("IMPORTE TOTAL: S/ "+montoTotal+"",montoTotalFont));
+            fraseMonto.setAlignment(Element.ALIGN_RIGHT);
+            document.add(fraseMonto);
+
+            System.out.println("cerramos pdf");
+
+            document.close();
+        }catch (Exception ex){
+            throw new Exception(ex.getMessage());
+        }
+        System.out.println("retornamos pdf");
+        return new ByteArrayInputStream(out.toByteArray());
 
     }
 }

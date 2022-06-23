@@ -4,6 +4,8 @@ import com.project.vivian.entidad.DetallesPedido;
 import com.project.vivian.entidad.Pedido;
 
 import javax.servlet.http.HttpServletResponse;
+
+import java.io.ByteArrayInputStream;
 import java.util.List;
 
 public interface PedidoService {
@@ -12,4 +14,5 @@ public interface PedidoService {
     public Pedido obtenerPedidoPorId(Integer id) throws Exception;
     public List<DetallesPedido> obtenerDetalles(Integer id) throws Exception;
     public void openPdf(Integer id, HttpServletResponse response) throws Exception;
+	ByteArrayInputStream openPdfTwo(Integer id) throws Exception;
 }
